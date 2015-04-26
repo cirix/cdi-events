@@ -67,7 +67,22 @@ public class ZookeeperService implements Serializable{
         boolean succeed = false;
         try{
             zooKeeper = zookeeperConnectionFactory.getConnection();
-            String messageCreate= zooKeeper.create(path, null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+            String[] dirs=path.split("/");
+            String messageCreate = "";
+            if(dirs.length > 2){
+                StringBuilder builder = new StringBuilder();
+                for(String dir : dirs){
+                    if(dir.equalsIgnoreCase("")){
+                       logger.info("The path is empth!{}",path);
+                    }else{
+                        String tempPath = builder.append("/").append(dir).toString();
+                        logger.info("[Action]->Registering path:{}",tempPath);
+                        messageCreate+= zooKeeper.create(tempPath, null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+                    }
+                }
+            }else{
+                messageCreate= zooKeeper.create(path, null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+            }
             logger.info("Registering result:{}",messageCreate);
             succeed=true;
         } catch (KeeperException | InterruptedException e) {

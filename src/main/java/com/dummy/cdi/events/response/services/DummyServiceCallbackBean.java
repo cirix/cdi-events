@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -15,8 +17,9 @@ import javax.ws.rs.Produces;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 
+@Startup
+@Singleton
 @Path("/dummy-service/{caller}")
-@Stateless
 public class DummyServiceCallbackBean implements Serializable{
     private static final long serialVersionUID = 5260887158400788681L;
     private static final Logger logger = LoggerFactory.getLogger(DummyServiceCallbackBean.class);
