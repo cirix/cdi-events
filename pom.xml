@@ -23,7 +23,7 @@
         <slf4j.version>1.7.7</slf4j.version>
         <junit.version>4.9</junit.version>
         <arquillian.version>1.1.8.Final</arquillian.version>
-        <zookeeper.version>3.4.6</zookeeper.version>
+        <zookeeper.version>3.4.14</zookeeper.version>
         <jclouds.version>1.8.0</jclouds.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
